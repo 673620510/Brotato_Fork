@@ -16,11 +16,13 @@ public class Player : MonoBehaviour
     public float maxHp = 15f;
     public float exp = 0;
 
+    public Transform weaponsPos;
 
     private void Awake()
     {
         Instance = this;
         playerVisual = GameObject.Find("PlayerVisual").transform;
+        weaponsPos = GameObject.Find("WeaponsPos").transform;
         anim = playerVisual.GetComponent<Animator>();
     }
     private void Update()

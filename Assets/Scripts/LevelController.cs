@@ -61,8 +61,21 @@ public class LevelController : MonoBehaviour
         waveTimer = currentLevelData.waveTimer;
 
         GenerateEnemy();
+
+        GenerateWeapon();
     }
 
+    private void GenerateWeapon()
+    {
+        int index = 0;
+        foreach (WeaponData weaponData in GameManager.Instance.currentWeapons)
+        {
+            GameObject go = Resources.Load<GameObject>("Prefabs/" + weaponData.name);
+            WeaponBase wb = Instantiate(go, Player.Instance.weaponsPos.GetChild(index)).GetComponent<WeaponBase>();
+            wb.data = weaponData;
+            index++;
+        }
+    }
 
     private void Update()
     {

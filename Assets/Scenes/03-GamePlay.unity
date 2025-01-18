@@ -823,7 +823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415466208}
   m_Layer: 0
-  m_Name: Weapons
+  m_Name: WeaponsPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4423,6 +4423,7 @@ MonoBehaviour:
   money: 30
   maxHp: 15
   exp: 0
+  weaponsPos: {fileID: 0}
 --- !u!70 &2101252815
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

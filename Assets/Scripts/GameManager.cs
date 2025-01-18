@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public RoleData currentRole;
-    public List<WeaponData> currentWeapon = new List<WeaponData>();
+    public List<WeaponData> currentWeapons = new List<WeaponData>();
     public DifficultyData currentDifficulty;
     public int currentWave = 1;
     public GameObject enemyBullet_prefab;

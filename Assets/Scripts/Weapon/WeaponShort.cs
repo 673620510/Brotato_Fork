@@ -13,7 +13,7 @@ public class WeaponShort : WeaponBase
     {
         if (isCooling) return;
 
-        gameObject.GetComponent<CircleCollider2D>().enabled = true;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
 
         StartCoroutine(GoPosition());
 
@@ -34,7 +34,7 @@ public class WeaponShort : WeaponBase
             yield return null;
         }
 
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
 
         isAiming = false;
 

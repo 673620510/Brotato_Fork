@@ -10,6 +10,18 @@ public class WeaponLong : WeaponBase
         Vector2 dir = (enemy.position - transform.position).normalized;
 
         GameObject bullet = GenerateBullet(dir);
+
+        SetZ(bullet);
+
+        bullet.GetComponent<Bullet>().damage = data.damage;
+        bullet.GetComponent<Bullet>().speed = 15f;
+
+        isCooling = true;
+    }
+
+    private void SetZ(GameObject bullet)
+    {
+        bullet.transform.eulerAngles = new Vector3(bullet.transform.eulerAngles.x, bullet.transform.eulerAngles.y, transform.eulerAngles.z - originZ);
     }
 
     public virtual GameObject GenerateBullet(Vector2 dir)

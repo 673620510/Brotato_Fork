@@ -36,7 +36,7 @@ public class WeaponUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ButtonClick(WeaponData w)
     {
-        GameManager.Instance.currentWeapon.Add(w);
+        GameManager.Instance.currentWeapons.Add(w);
 
         GameObject weapon_clone = Instantiate(WeaponSelectPanel.Instance._weaponDetails, DifficultySelectPanel.Instance._difficultyContent);
         weapon_clone.transform.SetSiblingIndex(0);
