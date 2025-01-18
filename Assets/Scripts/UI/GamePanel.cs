@@ -43,17 +43,17 @@ public class GamePanel : MonoBehaviour
 
     public void RenewExp()
     {
-        _expSlider.value = Player.Instance.exp % 12 / 12;
-        _expCount.text = "LV." + Player.Instance.exp / 12;
+        _expSlider.value = GameManager.Instance.exp % 12 / 12;
+        _expCount.text = "LV." + GameManager.Instance.exp / 12;
     }
     public void RenewHp()
     {
-        _hpCount.text = Player.Instance.hp + "/" + Player.Instance.maxHp;
-        _hpSlider.value = Player.Instance.hp / Player.Instance.maxHp;
+        _hpCount.text = GameManager.Instance.hp + "/" + GameManager.Instance.propData.maxHp;
+        _hpSlider.value = GameManager.Instance.hp / GameManager.Instance.propData.maxHp;
     }
     public void RenewMoney()
     {
-        _moneyCount.text = Player.Instance.money.ToString();
+        _moneyCount.text = GameManager.Instance.money.ToString();
     }
 
     public void RenewCountDown(float time)

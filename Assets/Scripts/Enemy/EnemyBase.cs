@@ -7,11 +7,6 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
     public EnemyData enemyData;
-    //public float hp;
-    //public float damage;
-    //public float speed;
-    //public float attackTime;
-    //public int provideExp = 1;
 
     public float attackTimer = 0;
     public bool isContact = false;//是否接触到玩家
@@ -125,7 +120,7 @@ public class EnemyBase : MonoBehaviour
     }
     /// <summary>
     /// 攻击
-    /// </summary>
+    /// </summary> 
     public void Attack()
     {
         if (isCooling) return;
@@ -140,7 +135,7 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     public void Dead()
     {
-        Player.Instance.exp += enemyData.provideExp;
+        GameManager.Instance.exp += enemyData.provideExp;
         GamePanel.Instance.RenewExp();
 
         Instantiate(GameManager.Instance.money_prefab, transform.position, Quaternion.identity);

@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
 
     public RoleData currentRole;
     public List<WeaponData> currentWeapons = new List<WeaponData>();
-    public PropData currentProp = new PropData();
+
+    [SerializeField]
+    public PropData propData = new PropData();
+    public List<PropData> currentProps = new List<PropData>();
     public DifficultyData currentDifficulty;
     public int currentWave = 1;
 
@@ -33,6 +36,10 @@ public class GameManager : MonoBehaviour
 
     public List<EnemyData> enemyDatas = new List<EnemyData>();
     public TextAsset enemyTextAsset;
+
+    public float hp = 15f;
+    public int money = 30;
+    public float exp = 0;
 
     private void Awake()
     {

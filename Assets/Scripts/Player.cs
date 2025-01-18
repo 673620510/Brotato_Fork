@@ -6,15 +6,9 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-    public float speed = 5f;
     public Transform playerVisual;
     public Animator anim;
-    public float hp = 15f;
     public bool isDead = false;
-
-    public int money = 30;
-    public float maxHp = 15f;
-    public float exp = 0;
 
     public Transform weaponsPos;
 
@@ -39,7 +33,7 @@ public class Player : MonoBehaviour
         Vector2 moveMent = new Vector2(moveHorizontal, moveVertical);
 
         moveMent.Normalize();
-        transform.Translate(moveMent * speed * Time.deltaTime);
+        transform.Translate(moveMent * GameManager.Instance.propData.speed * GameManager.Instance.propData.speedPer * Time.deltaTime);
 
         if (moveMent.magnitude != 0)
         {
@@ -67,14 +61,14 @@ public class Player : MonoBehaviour
     {
         if (isDead) return;
 
-        if (hp - attack <= 0)
+        if (GameManager.Instance.hp - attack <= 0)
         {
-            hp = 0;
+            GameManager.Instance.hp = 0;
             Dead();
         }
         else
         {
-            hp -= attack;
+            GameManager.Instance.hp -= attack;
         }
 
         GamePanel.Instance.RenewHp();
@@ -94,7 +88,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Money"))
         {
             Destroy(collision.gameObject);
-            money += 1;
+            GameManager.Instance.money += 1;
             GamePanel.Instance.RenewMoney();
         }
     }

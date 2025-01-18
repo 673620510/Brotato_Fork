@@ -8,7 +8,7 @@ public class PropData
     public float price;//价格
     public string describe;//描述
     //生命值相关
-    public float maxHP = 15;
+    public float maxHp = 15;
     public float revive = 0;//生命再生
     //武器相关
     public float short_damge = 1;//附加近战武器伤害 百分比
