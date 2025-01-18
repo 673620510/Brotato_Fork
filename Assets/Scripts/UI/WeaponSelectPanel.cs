@@ -13,9 +13,6 @@ public class WeaponSelectPanel : MonoBehaviour
     public CanvasGroup _contentCanvasGroup;
     public Transform _weaponContent;
 
-    public List<WeaponData> weaponDatas = new List<WeaponData>();//武器数据信息
-    public TextAsset weaponTextAsset;
-
     public GameObject weapon_prefab;
     public Transform _weaponList;
 
@@ -33,10 +30,6 @@ public class WeaponSelectPanel : MonoBehaviour
         _weaponContent = GameObject.Find("WeaponContent").transform;
         _contentCanvasGroup = GameObject.Find("WeaponContent").GetComponent<CanvasGroup>();
 
-        //读取json文件
-        weaponTextAsset = Resources.Load<TextAsset>("Data/weapon");
-        weaponDatas = JsonConvert.DeserializeObject<List<WeaponData>>(weaponTextAsset.text);
-
         weapon_prefab = Resources.Load<GameObject>("Prefabs/Weapon");
         _weaponList = GameObject.Find("WeaponList").transform;
 
@@ -50,7 +43,7 @@ public class WeaponSelectPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (WeaponData weaponData in weaponDatas)
+        foreach (WeaponData weaponData in GameManager.Instance.weaponDatas)
         {
             WeaponUI w = Instantiate(weapon_prefab, _weaponList).GetComponent<WeaponUI>();
             w.SetData(weaponData);

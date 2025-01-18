@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7764299056038100593}
   - component: {fileID: 7096414706415749567}
+  - component: {fileID: -4391353563407365874}
   m_Layer: 0
   m_Name: "\u624B\u67AA"
   m_TagString: Untagged
@@ -84,3 +85,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4391353563407365874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085451580208911686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d629edffa02f4b7458fffcff0dc2af3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    id: 0
+    name: 
+    avatar: 
+    grade: 0
+    damage: 0
+    isLong: 0
+    range: 0
+    critical_strikes_multiple: 0
+    critical_strikes_probability: 0
+    cooling: 0
+    repel: 0
+    describe: 
+  isAttack: 0
+  isCooling: 0
+  isAiming: 1
+  attackTimer: 0
+  moveSpeed: 0
+  enemy: {fileID: 0}
+  originZ: 0

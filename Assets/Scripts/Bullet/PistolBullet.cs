@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PostolBullet : Bullet
+public class PistolBullet : Bullet
 {
     public new void Awake()
     {

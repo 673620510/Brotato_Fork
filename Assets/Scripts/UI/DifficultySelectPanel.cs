@@ -13,9 +13,6 @@ public class DifficultySelectPanel : MonoBehaviour
     public CanvasGroup _canvasGroup;
     public CanvasGroup _contentCanvasGroup;
 
-    public List<DifficultyData> difficultyDatas = new List<DifficultyData>();
-    public TextAsset difficultyTextAsset;
-
     public GameObject difficulty_profab;
     public Transform _difficultyList;
 
@@ -30,9 +27,6 @@ public class DifficultySelectPanel : MonoBehaviour
         _difficultyContent = GameObject.Find("DifficultyContent").transform;
         _canvasGroup= GetComponent<CanvasGroup>();
 
-        difficultyTextAsset = Resources.Load<TextAsset>("Data/difficulty");
-        difficultyDatas = JsonConvert.DeserializeObject<List<DifficultyData>>(difficultyTextAsset.text);
-
         _difficultyList = GameObject.Find("DifficultyList").transform;
         difficulty_profab = Resources.Load<GameObject>("Prefabs/Difficulty");
 
@@ -44,7 +38,7 @@ public class DifficultySelectPanel : MonoBehaviour
 
     private void Start()
     {
-        foreach (DifficultyData difficultyData in difficultyDatas)
+        foreach (DifficultyData difficultyData in GameManager.Instance.difficultyDatas)
         {
             DifficultyUI d = Instantiate(difficulty_profab, _difficultyList).GetComponent<DifficultyUI>();
             d.SetData(difficultyData);

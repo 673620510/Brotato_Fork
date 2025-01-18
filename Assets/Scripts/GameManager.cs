@@ -16,6 +16,18 @@ public class GameManager : MonoBehaviour
     public GameObject enemyBullet_prefab;
     public GameObject money_prefab;
     public GameObject redCircle_prefab;
+    public GameObject arrowBullet_prefab;
+    public GameObject pistolBullet_prefab;
+    public GameObject madicalBullet_prefab;
+
+    public List<RoleData> roleDatas = new List<RoleData>();//角色数据信息
+    public TextAsset roleTextAsset;
+
+    public List<DifficultyData> difficultyDatas = new List<DifficultyData>();
+    public TextAsset difficultyTextAsset;
+
+    public List<WeaponData> weaponDatas = new List<WeaponData>();//武器数据信息
+    public TextAsset weaponTextAsset;
 
     public List<EnemyData> enemyDatas = new List<EnemyData>();
     public TextAsset enemyTextAsset;
@@ -31,6 +43,20 @@ public class GameManager : MonoBehaviour
         enemyBullet_prefab = Resources.Load<GameObject>("Prefabs/EnemyBullet");
         money_prefab = Resources.Load<GameObject>("Prefabs/Money");
         redCircle_prefab = Resources.Load<GameObject>("Prefabs/RedCircle");
+        arrowBullet_prefab = Resources.Load<GameObject>("Prefabs/ArrowBullet");
+        pistolBullet_prefab = Resources.Load<GameObject>("Prefabs/PistolBullet");
+        madicalBullet_prefab = Resources.Load<GameObject>("Prefabs/MedicalBullet");
+
+        //读取json文件
+        roleTextAsset = Resources.Load<TextAsset>("Data/role");
+        roleDatas = JsonConvert.DeserializeObject<List<RoleData>>(roleTextAsset.text);
+
+        difficultyTextAsset = Resources.Load<TextAsset>("Data/difficulty");
+        difficultyDatas = JsonConvert.DeserializeObject<List<DifficultyData>>(difficultyTextAsset.text);
+
+        //读取json文件
+        weaponTextAsset = Resources.Load<TextAsset>("Data/weapon");
+        weaponDatas = JsonConvert.DeserializeObject<List<WeaponData>>(weaponTextAsset.text);
     }
     private void Start()
     {

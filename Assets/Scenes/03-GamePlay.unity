@@ -4653,6 +4653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 5852543948676729117, guid: 7c4fc0375a033e64a8949dc4f15f951a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6293674611927286772, guid: 7c4fc0375a033e64a8949dc4f15f951a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4832,6 +4836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedicalBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 4798315065978675130, guid: 5bcc25d100bd84647884aabb966a21bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5311739385952947852, guid: 5bcc25d100bd84647884aabb966a21bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4989,6 +4997,10 @@ PrefabInstance:
     - target: {fileID: 8573140253548878560, guid: d1a416397371c6240b83e9fff701e189, type: 3}
       propertyPath: m_Name
       value: PostolBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573140253548878560, guid: d1a416397371c6240b83e9fff701e189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

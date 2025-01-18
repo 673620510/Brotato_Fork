@@ -10,9 +10,6 @@ public class RoleSelectPanel : MonoBehaviour
 {
     public static RoleSelectPanel Instance;
 
-    public List<RoleData> roleDatas = new List<RoleData>();//角色数据信息
-    public TextAsset roleTextAsset;
-
     public Transform _roleList;
     public GameObject role_prefab;
 
@@ -32,10 +29,6 @@ public class RoleSelectPanel : MonoBehaviour
         _roleList = GameObject.Find("RoleList").transform;
         role_prefab = Resources.Load<GameObject>("Prefabs/Role");
 
-        //读取json文件
-        roleTextAsset = Resources.Load<TextAsset>("Data/role");
-        roleDatas = JsonConvert.DeserializeObject<List<RoleData>>(roleTextAsset.text);
-
         _roleName = GameObject.Find("RoleName").GetComponent<TextMeshProUGUI>();
         _avatar = GameObject.Find("Avatar_Role").GetComponent<Image>();
         _roleDescribe = GameObject.Find("RoleDescribe").GetComponent<TextMeshProUGUI>();
@@ -48,7 +41,7 @@ public class RoleSelectPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (RoleData roleData in roleDatas)
+        foreach (RoleData roleData in GameManager.Instance.roleDatas)
         {
             RoleUI r = GameObject.Instantiate(role_prefab, _roleList).GetComponent<RoleUI>();
             r.SetData(roleData);

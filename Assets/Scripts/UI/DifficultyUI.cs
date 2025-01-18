@@ -53,7 +53,7 @@ public class DifficultyUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         string result = "";
 
-        foreach (DifficultyData d in DifficultySelectPanel.Instance.difficultyDatas)
+        foreach (DifficultyData d in GameManager.Instance.difficultyDatas)
         {
             result += d.describe + "\n";
 
