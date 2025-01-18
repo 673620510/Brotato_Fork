@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
 
     public RoleData currentRole;
     public List<WeaponData> currentWeapons = new List<WeaponData>();
+    public PropData currentProp = new PropData();
     public DifficultyData currentDifficulty;
     public int currentWave = 1;
+
     public GameObject enemyBullet_prefab;
     public GameObject money_prefab;
     public GameObject redCircle_prefab;
