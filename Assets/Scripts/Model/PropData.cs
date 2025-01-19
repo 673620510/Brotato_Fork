@@ -26,6 +26,6 @@ public class PropData
     public float shopDiscount = 1;//道具价格 百分比
     public float expMuti = 1;//经验倍率 百分比
     public float pickRange = 1;//拾取范围  百分比
-    public int critical_strikes_probability;//暴击率 百分比
+    public int critical_strikes_probability = 1;//暴击率 百分比
 
 }

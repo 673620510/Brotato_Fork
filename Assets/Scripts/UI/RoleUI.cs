@@ -23,7 +23,7 @@ public class RoleUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
     {
         this.roleData = r;
 
-        if (roleData.unlock == 0)
+        if (roleData.unlock == 0 && PlayerPrefs.GetInt(roleData.name, 1) == 0)
         {
             _avatar.sprite = Resources.Load<Sprite>("Image/UI/Ëø");
             _avatar.SetNativeSize();

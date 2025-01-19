@@ -135,7 +135,7 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     public void Dead()
     {
-        GameManager.Instance.exp += enemyData.provideExp;
+        GameManager.Instance.exp += enemyData.provideExp * GameManager.Instance.propData.expMuti;
         GamePanel.Instance.RenewExp();
 
         Instantiate(GameManager.Instance.money_prefab, transform.position, Quaternion.identity);

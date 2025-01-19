@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     public bool isDead = false;
 
     public Transform weaponsPos;
+    public float reviveTimer;
 
     private void Awake()
     {
@@ -18,13 +20,55 @@ public class Player : MonoBehaviour
         playerVisual = GameObject.Find("PlayerVisual").transform;
         weaponsPos = GameObject.Find("WeaponsPos").transform;
         anim = playerVisual.GetComponent<Animator>();
+
+        if (GameManager.Instance.currentWave == 1)
+        {
+            GameManager.Instance.InitProp();
+        }
+    }
+    private void Start()
+    {
+        if (GameManager.Instance.propData.maxHp >= 50)
+        {
+            if (PlayerPrefs.GetInt("公牛") == 0)
+            {
+                Debug.Log("公牛解锁");
+                PlayerPrefs.SetInt("公牛", 1);
+                for (int i = 0; i < GameManager.Instance.roleDatas.Count; i++)
+                {
+                    if (GameManager.Instance.roleDatas[i].name == "公牛")
+                    {
+                        GameManager.Instance.roleDatas[i].unlock = 1;
+                    }
+                }
+            }
+        }
     }
     private void Update()
     {
-        if (isDead) return;
+        if (isDead || LevelController.Instance.waveTimer <= 0) return;
 
         Move();
+        Revive();
+        EatMoney();
     }
+
+    private void Revive()
+    {
+        reviveTimer += Time.deltaTime;
+
+        if (reviveTimer >= 1f)
+        {
+            GameManager.Instance.hp = Mathf.Clamp(GameManager.Instance.hp += GameManager.Instance.propData.revive, 0, GameManager.Instance.propData.maxHp);
+
+            if (GameManager.Instance.currentRole.name == "公牛")
+            {
+                GameManager.Instance.hp = Mathf.Clamp(GameManager.Instance.hp += GameManager.Instance.propData.revive, 0, GameManager.Instance.propData.maxHp);
+            }
+        }
+        
+    }
+
     public void Move()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -83,13 +127,27 @@ public class Player : MonoBehaviour
         anim.speed = 0;
         LevelController.Instance.BadGame();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Money"))
+    //    {
+    //        Destroy(collision.gameObject);
+    //        GameManager.Instance.money += 1;
+    //        GamePanel.Instance.RenewMoney();
+    //    }
+    //}
+    private void EatMoney()
     {
-        if (collision.CompareTag("Money"))
+        Collider2D[] moneyInRange = Physics2D.OverlapCircleAll(transform.position, 0.5f * GameManager.Instance.propData.pickRange, LayerMask.GetMask("Item"));
+        if (moneyInRange.Length > 0)
         {
-            Destroy(collision.gameObject);
-            GameManager.Instance.money += 1;
-            GamePanel.Instance.RenewMoney();
+            for (int i = 0; i < moneyInRange.Length; i++)
+            {
+                Destroy(moneyInRange[i].gameObject);
+
+                GameManager.Instance.money += 1;
+                GamePanel.Instance.RenewMoney();
+            }
         }
     }
 }

@@ -13,7 +13,17 @@ public class WeaponLong : WeaponBase
 
         SetZ(bullet);
 
-        bullet.GetComponent<Bullet>().damage = data.damage;
+        bool isCritical = CriticalHits();
+        if (isCritical)
+        {
+            bullet.GetComponent<Bullet>().damage = data.damage * data.critical_strikes_multiple;
+        }
+        else
+        {
+            bullet.GetComponent<Bullet>().damage = data.damage;
+        }
+
+
         bullet.GetComponent<Bullet>().speed = 15f;
 
         isCooling = true;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponBase : MonoBehaviour
 {
@@ -22,7 +23,20 @@ public class WeaponBase : MonoBehaviour
     }
     public void Start()
     {
-        
+        data.critical_strikes_probability *= GameManager.Instance.propData.critical_strikes_probability;
+
+        if (data.isLong == 0)
+        {
+            data.range *= GameManager.Instance.propData.short_range;
+            data.damage *= GameManager.Instance.propData.short_damge;
+            data.cooling /= GameManager.Instance.propData.short_attackSpeed;
+        }
+        else if (data.isLong == 1)
+        {
+            data.range *= GameManager.Instance.propData.long_range;
+            data.damage *= GameManager.Instance.propData.long_damge;
+            data.cooling /= GameManager.Instance.propData.long_attackSpeed;
+        }
     }
     public void Update()
     {
@@ -66,4 +80,9 @@ public class WeaponBase : MonoBehaviour
         }
     }
     public virtual void Fire() { }
+    public bool CriticalHits()
+    {
+        float randomValue = Random.Range(0, 1);
+        return randomValue < data.critical_strikes_probability;
+    }
 }

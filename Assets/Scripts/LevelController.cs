@@ -65,6 +65,35 @@ public class LevelController : MonoBehaviour
         GenerateWeapon();
     }
 
+
+    private void Update()
+    {
+        if (waveTimer > 0)
+        {
+            waveTimer -= Time.deltaTime;
+            if (waveTimer <= 0)
+            {
+                waveTimer = 0;
+                if (GameManager.Instance.currentWave < 5)
+                {
+                    NextWave();
+                }
+                else
+                {
+                    GoodGame();
+                }
+            }
+        }
+        GamePanel.Instance.RenewCountDown(waveTimer);
+    }
+
+    private void NextWave()
+    {
+        GameManager.Instance.money += GameManager.Instance.propData.harvest;
+        SceneManager.LoadScene("04-Shop");
+        GameManager.Instance.currentWave += 1;
+    }
+
     private void GenerateWeapon()
     {
         int index = 0;
@@ -75,20 +104,6 @@ public class LevelController : MonoBehaviour
             wb.data = weaponData;
             index++;
         }
-    }
-
-    private void Update()
-    {
-        if (waveTimer > 0)
-        {
-            waveTimer -= Time.deltaTime;
-            if (waveTimer <= 0)
-            {
-                waveTimer = 0;
-                GoodGame();
-            }
-        }
-        GamePanel.Instance.RenewCountDown(waveTimer);
     }
     private void GenerateEnemy()
     {
@@ -168,6 +183,18 @@ public class LevelController : MonoBehaviour
         for (int i = 0; i < enemy_list.Count; i++)
         {
             if (enemy_list[i]) enemy_list[i].Dead();
+        }
+        if (PlayerPrefs.GetInt("多面手") == 0)
+        {
+            Debug.Log("多面手解锁");
+            PlayerPrefs.SetInt("多面手", 1);
+            for (int i = 0; i < GameManager.Instance.roleDatas.Count; i++)
+            {
+                if (GameManager.Instance.roleDatas[i].name == "多面手")
+                {
+                    GameManager.Instance.roleDatas[i].unlock = 1;
+                }
+            }
         }
     }
 }

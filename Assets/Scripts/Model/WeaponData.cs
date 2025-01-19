@@ -9,7 +9,7 @@ public class WeaponData
     public int grade;
     public float damage;
     public int isLong;
-    public int range;
+    public float range;
     public float critical_strikes_multiple;
     public float critical_strikes_probability;
     public float cooling;

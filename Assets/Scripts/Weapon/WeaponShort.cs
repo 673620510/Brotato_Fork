@@ -55,7 +55,16 @@ public class WeaponShort : WeaponBase
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyBase>().Injured(data.damage);
+            bool isCritical = CriticalHits();
+            if (isCritical)
+            {
+                collision.GetComponent<EnemyBase>().Injured(data.damage * data.critical_strikes_multiple);
+            }
+            else
+            {
+                collision.GetComponent<EnemyBase>().Injured(data.damage);
+            }
+            
             //gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
     }
