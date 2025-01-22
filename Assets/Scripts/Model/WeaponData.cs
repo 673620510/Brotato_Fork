@@ -1,12 +1,8 @@
 using System;
 
 [Serializable]
-public class WeaponData
+public class WeaponData : ItemData
 {
-    public int id;
-    public string name;
-    public string avatar;
-    public int grade;
     public float damage;
     public int isLong;
     public float range;
@@ -14,5 +10,4 @@ public class WeaponData
     public float critical_strikes_probability;
     public float cooling;
     public int repel;
-    public string describe;
 }

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject redCircle_prefab;
     public GameObject arrowBullet_prefab;
     public GameObject pistolBullet_prefab;
-    public GameObject madicalBullet_prefab;
+    public GameObject medicalBullet_prefab;
 
     public List<RoleData> roleDatas = new List<RoleData>();//角色数据信息
     public TextAsset roleTextAsset;
@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     public List<EnemyData> enemyDatas = new List<EnemyData>();
     public TextAsset enemyTextAsset;
+
+    public List<PropData> propDatas = new List<PropData>();
+    public TextAsset propTextAsset;
 
     public float hp = 15f;
     public int money = 30;
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
         redCircle_prefab = Resources.Load<GameObject>("Prefabs/RedCircle");
         arrowBullet_prefab = Resources.Load<GameObject>("Prefabs/ArrowBullet");
         pistolBullet_prefab = Resources.Load<GameObject>("Prefabs/PistolBullet");
-        madicalBullet_prefab = Resources.Load<GameObject>("Prefabs/MedicalBullet");
+        medicalBullet_prefab = Resources.Load<GameObject>("Prefabs/MedicalBullet");
 
         //读取json文件
         roleTextAsset = Resources.Load<TextAsset>("Data/role");
@@ -77,6 +80,9 @@ public class GameManager : MonoBehaviour
         //读取json文件
         weaponTextAsset = Resources.Load<TextAsset>("Data/weapon");
         weaponDatas = JsonConvert.DeserializeObject<List<WeaponData>>(weaponTextAsset.text);
+
+        propTextAsset = Resources.Load<TextAsset>("Data/prop");
+        propDatas = JsonConvert.DeserializeObject<List<PropData>>(propTextAsset.text);
     }
     private void Start()
     {

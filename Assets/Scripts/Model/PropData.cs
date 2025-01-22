@@ -1,12 +1,8 @@
 using System;
 
 [Serializable]
-public class PropData
+public class PropData : ItemData
 {
-    public int id;
-    public string name;
-    public float price;//价格
-    public string describe;//描述
     //生命值相关
     public float maxHp = 15;
     public float revive = 0;//生命再生
