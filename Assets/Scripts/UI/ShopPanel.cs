@@ -1,9 +1,11 @@
 using Mono.Cecil;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ShopPanel : MonoBehaviour
 {
@@ -16,7 +18,10 @@ public class ShopPanel : MonoBehaviour
 
     public Transform _attrLayout;
     public Transform _propsLayout;
+    public Transform _weaponsLayout;
+    public Transform _itemLayout;
 
+    public List<ItemData> props = new List<ItemData>();
     private void Awake()
     {
         Instance = this;
@@ -28,6 +33,8 @@ public class ShopPanel : MonoBehaviour
 
         _attrLayout = GameObject.Find("AttrLayout").transform;
         _propsLayout = GameObject.Find("PropsLayout").transform;
+        _weaponsLayout = GameObject.Find("WeaponsLayout").transform;
+        _itemLayout = GameObject.Find("ItemLayout").transform;
     }
 
     private void Start()
@@ -41,8 +48,80 @@ public class ShopPanel : MonoBehaviour
         _moneyText.text = GameManager.Instance.money.ToString();
 
         SetAttrUI();
-
+        ShowCurrentWeapon();
         ShowCurrentProp();
+        RandomProps();
+
+        _refreshButton.onClick.AddListener(() =>
+        {
+            RefreshItem();
+        });
+    }
+
+    private void RefreshItem()
+    {
+        if (GameManager.Instance.money < 3) return;
+
+        GameManager.Instance.money -= 3;
+        _moneyText.text = GameManager.Instance.money.ToString();
+        RandomProps();
+    }
+
+    private void RandomProps()
+    {
+        props.Clear();
+        int propCount = Random.Range(2, 4);
+        for (int i = 0; i < propCount; i++)
+        {
+            props.Add(GameManager.Instance.RandomOne(GameManager.Instance.propDatas) as ItemData);
+        }
+        for (int i = 0; i < 4 - propCount; i++)
+        {
+            props.Add(GameManager.Instance.RandomOne(GameManager.Instance.weaponDatas) as ItemData);
+        }
+        ShowPropUI();
+    }
+
+    private void ShowPropUI()
+    {
+        int index = 0;
+        foreach (ItemData item in props)
+        {
+            _itemLayout.GetChild(index).GetComponent<ItemCardUI>().itemData = item;
+            _itemLayout.GetChild(index).GetComponent<ItemCardUI>()._canvasGroup.alpha = 1;
+            _itemLayout.GetChild(index).GetChild(1).GetComponent<TMP_Text>().text = item.name;
+            if (item is WeaponData)
+            {
+                _itemLayout.GetChild(index).GetChild(2).GetComponent<TMP_Text>().text = "ÎäÆ÷";
+                _itemLayout.GetChild(index).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.avatar);
+            }
+            else
+            {
+                _itemLayout.GetChild(index).GetChild(2).GetComponent<TMP_Text>().text = "µÀ¾ß";
+                _itemLayout.GetChild(index).GetChild(0).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance.propAtlas.GetSprite(item.name);
+            }
+            _itemLayout.GetChild(index).GetChild(3).GetComponent<TMP_Text>().text = item.describe;
+            _itemLayout.GetChild(index).GetChild(4).GetChild(0).GetComponent<TMP_Text>().text = item.price.ToString();
+            index++;
+        }
+    }
+
+    private void ShowCurrentWeapon()
+    {
+        int count = _weaponsLayout.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            if (i < GameManager.Instance.currentWeapons.Count)
+            {
+                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().enabled = true;
+                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManager.Instance.currentWeapons[i].avatar);
+            }
+            else
+            {
+                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().enabled = false;
+            }
+        }
+        _weaponTitle.text = "ÎäÆ÷(" + GameManager.Instance.currentWeapons.Count + "/" + GameManager.Instance.propData.slot + ")";
     }
 
     private void ShowCurrentProp()

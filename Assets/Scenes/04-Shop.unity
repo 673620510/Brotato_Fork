@@ -1319,7 +1319,7 @@ GameObject:
   - component: {fileID: 414123400}
   - component: {fileID: 414123401}
   m_Layer: 5
-  m_Name: SelectItem
+  m_Name: ItemLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2236,6 +2236,9 @@ MonoBehaviour:
   _moneyText: {fileID: 0}
   _weaponTitle: {fileID: 0}
   _attrLayout: {fileID: 0}
+  _propsLayout: {fileID: 0}
+  _weaponsLayout: {fileID: 0}
+  props: []
 --- !u!1 &652654269
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,6 +6438,8 @@ MonoBehaviour:
   propData:
     id: 0
     name: 
+    avatar: 
+    grade: 0
     price: 0
     describe: 
     maxHp: 15
@@ -6465,7 +6470,7 @@ MonoBehaviour:
   redCircle_prefab: {fileID: 0}
   arrowBullet_prefab: {fileID: 0}
   pistolBullet_prefab: {fileID: 0}
-  madicalBullet_prefab: {fileID: 0}
+  medicalBullet_prefab: {fileID: 0}
   roleDatas: []
   roleTextAsset: {fileID: 0}
   difficultyDatas: []
@@ -6474,6 +6479,8 @@ MonoBehaviour:
   weaponTextAsset: {fileID: 0}
   enemyDatas: []
   enemyTextAsset: {fileID: 0}
+  propDatas: []
+  propTextAsset: {fileID: 0}
   hp: 15
   money: 30
   exp: 0

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -35,15 +36,17 @@ public class GameManager : MonoBehaviour
     public List<WeaponData> weaponDatas = new List<WeaponData>();//武器数据信息
     public TextAsset weaponTextAsset;
 
-    public List<EnemyData> enemyDatas = new List<EnemyData>();
+    public List<EnemyData> enemyDatas = new List<EnemyData>();//敌人数据信息
     public TextAsset enemyTextAsset;
 
-    public List<PropData> propDatas = new List<PropData>();
+    public List<PropData> propDatas = new List<PropData>();//道具数据信息
     public TextAsset propTextAsset;
 
     public float hp = 15f;
     public int money = 30;
     public float exp = 0;
+
+    public SpriteAtlas propAtlas;//道具图集
 
     private void Awake()
     {
@@ -83,6 +86,8 @@ public class GameManager : MonoBehaviour
 
         propTextAsset = Resources.Load<TextAsset>("Data/prop");
         propDatas = JsonConvert.DeserializeObject<List<PropData>>(propTextAsset.text);
+
+        propAtlas = Resources.Load<SpriteAtlas>("Image/其他/Props");
     }
     private void Start()
     {
