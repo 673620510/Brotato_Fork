@@ -28,13 +28,13 @@ public class WeaponBase : MonoBehaviour
         if (data.isLong == 0)
         {
             data.range *= GameManager.Instance.propData.short_range;
-            data.damage *= GameManager.Instance.propData.short_damage;
+            data.damage *= (GameManager.Instance.propData.short_damage * data.grade);
             data.cooling /= GameManager.Instance.propData.short_attackSpeed;
         }
         else if (data.isLong == 1)
         {
             data.range *= GameManager.Instance.propData.long_range;
-            data.damage *= GameManager.Instance.propData.long_damage;
+            data.damage *= (GameManager.Instance.propData.long_damage * data.grade);
             data.cooling /= GameManager.Instance.propData.long_attackSpeed;
         }
     }

@@ -59,12 +59,23 @@ public class WeaponShort : WeaponBase
             if (isCritical)
             {
                 collision.GetComponent<EnemyBase>().Injured(data.damage * data.critical_strikes_multiple);
+
+                Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+                number.text.text = (data.damage * data.critical_strikes_multiple).ToString();
+                number.text.color = new Color(255 / 255f, 178 / 255f, 0);
+                number.transform.position = transform.position;
             }
             else
             {
                 collision.GetComponent<EnemyBase>().Injured(data.damage);
+
+                Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+                number.text.text = data.damage.ToString();
+                number.text.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
+                number.transform.position = transform.position;
             }
-            
+
+            Instantiate(GameManager.Instance.attackMusic);
             //gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
     }

@@ -115,6 +115,13 @@ public class Player : MonoBehaviour
         else
         {
             GameManager.Instance.hp -= attack;
+
+            Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+            number.text.text = attack.ToString();
+            number.text.color = new Color(255 / 255f, 0, 0);
+            number.transform.position = transform.position;
+
+            Instantiate(GameManager.Instance.hurtMusic);
         }
 
         GamePanel.Instance.RenewHp();
@@ -149,6 +156,11 @@ public class Player : MonoBehaviour
 
                 GameManager.Instance.money += 1;
                 GamePanel.Instance.RenewMoney();
+
+                Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+                number.text.text = "+1";
+                number.text.color = new Color(86 / 255f, 185 / 255f, 86 / 255f);
+                number.transform.position = transform.position;
             }
         }
     }

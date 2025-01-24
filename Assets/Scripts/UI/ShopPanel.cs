@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -56,6 +57,17 @@ public class ShopPanel : MonoBehaviour
         {
             RefreshItem();
         });
+
+        SetWeaponSlotIndex();
+    }
+
+    private void SetWeaponSlotIndex()
+    {
+        int count = _weaponsLayout.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            _weaponsLayout.GetChild(i).GetComponent<WeaponSlot>().slotCount = i;
+        }
     }
 
     private void RefreshItem()
@@ -107,19 +119,40 @@ public class ShopPanel : MonoBehaviour
         }
     }
 
-    private void ShowCurrentWeapon()
+    public void ShowCurrentWeapon()
     {
         int count = _weaponsLayout.childCount;
         for (int i = 0; i < count; i++)
         {
+            WeaponSlot slot = _weaponsLayout.GetChild(i).GetComponent<WeaponSlot>();
+
             if (i < GameManager.Instance.currentWeapons.Count)
             {
-                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().enabled = true;
-                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManager.Instance.currentWeapons[i].avatar);
+                slot._weaponIcon.enabled = true;
+                slot.weaponData = GameManager.Instance.currentWeapons[i];
+                slot._weaponIcon.sprite = Resources.Load<Sprite>(slot.weaponData.avatar);
+
+                switch (slot.weaponData.grade)
+                {
+                    case 1:
+                        slot._weaponBG.color = new Color(29 / 255f, 29 / 255f, 29 / 255f);
+                        break;
+                    case 2:
+                        slot._weaponBG.color = new Color(58 / 255f, 83 / 255f, 99 / 255f);
+                        break;
+                    case 3:
+                        slot._weaponBG.color = new Color(79 / 255f, 58 / 255f, 99 / 255f);
+                        break;
+                    case 4:
+                        slot._weaponBG.color = new Color(99 / 255f, 50 / 255f, 50 / 255f);
+                        break;
+                }
             }
             else
             {
-                _weaponsLayout.GetChild(i).GetChild(0).GetComponent<Image>().enabled = false;
+                slot._weaponIcon.enabled = false;
+                slot._weaponBG.color = new Color(29 / 255f, 29 / 255f, 29 / 255f);
+                slot.weaponData = null;
             }
         }
         _weaponTitle.text = "ÎäÆ÷(" + GameManager.Instance.currentWeapons.Count + "/" + GameManager.Instance.propData.slot + ")";
@@ -182,14 +215,16 @@ public class ShopPanel : MonoBehaviour
 
         if (itemData is WeaponData)
         {
-            GameManager.Instance.currentWeapons.Add(itemData as WeaponData);
+            WeaponData tempItem = JsonConvert.DeserializeObject<WeaponData>(JsonConvert.SerializeObject(itemData));
+            GameManager.Instance.currentWeapons.Add(tempItem);
             ShowCurrentWeapon();
         }
         else
         {
-            GameManager.Instance.currentProps.Add(itemData as PropData);
+            PropData tempItem = JsonConvert.DeserializeObject<PropData>(JsonConvert.SerializeObject(itemData));
+            GameManager.Instance.currentProps.Add(tempItem);
             ShowCurrentProp();
-            GameManager.Instance.FusionAttr(itemData as PropData);
+            GameManager.Instance.FusionAttr(tempItem);
             SetAttrUI();
         }
         return true;

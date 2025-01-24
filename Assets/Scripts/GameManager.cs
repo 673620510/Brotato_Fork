@@ -47,6 +47,12 @@ public class GameManager : MonoBehaviour
     public float exp = 0;
 
     public SpriteAtlas propAtlas;//道具图集
+    public GameObject number_prefab;
+
+    public GameObject attackMusic;
+    public GameObject shootMusic;
+    public GameObject menuMusic;
+    public GameObject hurtMusic;
 
     private void Awake()
     {
@@ -72,6 +78,11 @@ public class GameManager : MonoBehaviour
         arrowBullet_prefab = Resources.Load<GameObject>("Prefabs/ArrowBullet");
         pistolBullet_prefab = Resources.Load<GameObject>("Prefabs/PistolBullet");
         medicalBullet_prefab = Resources.Load<GameObject>("Prefabs/MedicalBullet");
+        number_prefab = Resources.Load<GameObject>("Prefabs/Number");
+        attackMusic = Resources.Load<GameObject>("Prefabs/AttackMusic");
+        hurtMusic = Resources.Load<GameObject>("Prefabs/HurtMusic");
+        menuMusic = Resources.Load<GameObject>("Prefabs/MenuMusic");
+        shootMusic = Resources.Load<GameObject>("Prefabs/ShootMusic");
 
         //读取json文件
         roleTextAsset = Resources.Load<TextAsset>("Data/role");

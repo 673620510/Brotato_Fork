@@ -9,11 +9,15 @@ public class WeaponLong : WeaponBase
 
         Vector2 dir = (enemy.position - transform.position).normalized;
 
+        Instantiate(GameManager.Instance.shootMusic);
+
         GameObject bullet = GenerateBullet(dir);
 
         SetZ(bullet);
 
         bool isCritical = CriticalHits();
+        bullet.GetComponent<Bullet>().isCritical = isCritical;
+
         if (isCritical)
         {
             bullet.GetComponent<Bullet>().damage = data.damage * data.critical_strikes_multiple;

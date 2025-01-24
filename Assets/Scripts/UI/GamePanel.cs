@@ -59,6 +59,11 @@ public class GamePanel : MonoBehaviour
     public void RenewCountDown(float time)
     {
         _countDown.text = time.ToString("F0");
+
+        if (time <= 5)
+        {
+            _countDown.color = new Color(255 / 25f, 0, 0);
+        }
     }
     public void RenewWaveCount()
     {

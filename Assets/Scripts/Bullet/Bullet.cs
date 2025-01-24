@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public float timer;
     public Vector2 dir = Vector2.zero;
     public string tagName;//碰撞检测的标签对象
+    public bool isCritical = false;
 
     public void Awake()
     {
@@ -38,6 +39,21 @@ public class Bullet : MonoBehaviour
             }
             else if (true)
             {
+                if (isCritical)
+                {
+                    Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+                    number.text.text = damage.ToString();
+                    number.text.color = new Color(255 / 255f, 178 / 255f, 0);
+                    number.transform.position = transform.position;
+                }
+                else
+                {
+                    Number number = Instantiate(GameManager.Instance.number_prefab).GetComponent<Number>();
+                    number.text.text = damage.ToString();
+                    number.text.color = new Color(255 / 255f, 255 / 255f, 255 / 255f);
+                    number.transform.position = transform.position;
+                }
+
                 collision.gameObject.GetComponent<EnemyBase>().Injured(damage);
             }
             Destroy(gameObject);

@@ -20,6 +20,8 @@ public class CommonButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         image.color= new Color(255,255,255);
         text.color = Color.black;
+
+        Instantiate(GameManager.Instance.menuMusic);
     }
 
     public void OnPointerExit(PointerEventData eventData)
