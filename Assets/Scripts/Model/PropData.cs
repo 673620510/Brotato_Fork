@@ -7,8 +7,8 @@ public class PropData : ItemData
     public float maxHp = 15;
     public float revive = 0;//生命再生
     //武器相关
-    public float short_damge = 1;//附加近战武器伤害 百分比
-    public float long_damge = 1;//附加远程武器伤害 百分比
+    public float short_damage = 1;//附加近战武器伤害 百分比
+    public float long_damage = 1;//附加远程武器伤害 百分比
     public float short_range = 1;//附加近战武器范围 百分比
     public float long_range = 1;//附加远程武器范围 百分比
     public float short_attackSpeed = 1;//附加近战武器攻速 百分比
@@ -22,6 +22,6 @@ public class PropData : ItemData
     public float shopDiscount = 1;//道具价格 百分比
     public float expMuti = 1;//经验倍率 百分比
     public float pickRange = 1;//拾取范围  百分比
-    public float critical_strikes_probability = 1;//暴击率 百分比
+    public float critical_strikes_probability = 0;//暴击率 百分比
 
 }

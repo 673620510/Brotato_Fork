@@ -16,6 +16,12 @@ public class ItemCardUI : MonoBehaviour
     {
         _button.onClick.AddListener(() =>
         {
+            bool result = ShopPanel.Instance.Shopping(itemData);
+            if (result)
+            {
+                _canvasGroup.alpha = 0;
+                _canvasGroup.interactable = false;
+            }
 
         });
     }

@@ -89,6 +89,7 @@ public class ShopPanel : MonoBehaviour
         {
             _itemLayout.GetChild(index).GetComponent<ItemCardUI>().itemData = item;
             _itemLayout.GetChild(index).GetComponent<ItemCardUI>()._canvasGroup.alpha = 1;
+            _itemLayout.GetChild(index).GetComponent<ItemCardUI>()._canvasGroup.interactable = true;
             _itemLayout.GetChild(index).GetChild(1).GetComponent<TMP_Text>().text = item.name;
             if (item is WeaponData)
             {
@@ -132,7 +133,7 @@ public class ShopPanel : MonoBehaviour
             if (i < GameManager.Instance.currentProps.Count)
             {
                 _propsLayout.GetChild(i).GetChild(0).GetComponent<Image>().enabled = true;
-                _propsLayout.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManager.Instance.currentProps[i].avatar);
+                _propsLayout.GetChild(i).GetChild(0).GetComponent<Image>().sprite = GameManager.Instance.propAtlas.GetSprite(GameManager.Instance.currentProps[i].name);
             }
             else
             {
@@ -150,9 +151,9 @@ public class ShopPanel : MonoBehaviour
         //生命再生
         _attrLayout.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.revive.ToString();
         //近战伤害
-        _attrLayout.GetChild(3).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.short_damge.ToString();
+        _attrLayout.GetChild(3).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.short_damage.ToString();
         //远程伤害
-        _attrLayout.GetChild(4).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.long_damge.ToString() ;
+        _attrLayout.GetChild(4).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.long_damage.ToString() ;
         //暴击率
         _attrLayout.GetChild(5).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.critical_strikes_probability.ToString();
         //拾取范围
@@ -165,5 +166,32 @@ public class ShopPanel : MonoBehaviour
         _attrLayout.GetChild(9).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.expMuti.ToString();
         //商店折扣
         _attrLayout.GetChild(10).GetChild(2).GetComponent<TMP_Text>().text = GameManager.Instance.propData.shopDiscount.ToString();
+    }
+    public bool Shopping(ItemData itemData)
+    {
+        if (GameManager.Instance.money < itemData.price) return false;
+
+        if (itemData is WeaponData && GameManager.Instance.currentWeapons.Count >= GameManager.Instance.propData.slot) return false;
+
+        if (itemData is PropData && GameManager.Instance.currentProps.Count >= 20) return false;
+
+        GameManager.Instance.money -= itemData.price;
+        _moneyText.text = GameManager.Instance.money.ToString();
+
+        
+
+        if (itemData is WeaponData)
+        {
+            GameManager.Instance.currentWeapons.Add(itemData as WeaponData);
+            ShowCurrentWeapon();
+        }
+        else
+        {
+            GameManager.Instance.currentProps.Add(itemData as PropData);
+            ShowCurrentProp();
+            GameManager.Instance.FusionAttr(itemData as PropData);
+            SetAttrUI();
+        }
+        return true;
     }
 }

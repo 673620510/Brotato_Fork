@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
             propData.short_attackSpeed += 0.5f;
             propData.long_range -= 0.5f;
             propData.short_range -= 0.5f;
-            propData.long_damge -= 0.5f;
+            propData.long_damage -= 0.5f;
         }
         else if (currentRole.name == "医生")
         {
@@ -139,13 +139,31 @@ public class GameManager : MonoBehaviour
         }
         else if (currentRole.name == "多面手")
         {
-            propData.long_damge += 0.2f;
-            propData.short_damge += 0.2f;
+            propData.long_damage += 0.2f;
+            propData.short_damage += 0.2f;
             propData.slot = 12;
         }
 
         hp = propData.maxHp;
         money = 30;
         exp = 0;
+    }
+
+    public void FusionAttr(PropData shopProp)
+    {
+        propData.maxHp += shopProp.maxHp;
+        propData.revive += shopProp.revive;
+        propData.short_damage += shopProp.short_damage;
+        propData.short_range += shopProp.short_range;
+        propData.short_attackSpeed += shopProp.short_attackSpeed;
+        propData.long_damage += shopProp.long_damage;
+        propData.long_range += shopProp.long_range;
+        propData.long_attackSpeed += shopProp.long_attackSpeed;
+        propData.speedPer += shopProp.speedPer;
+        propData.harvest += shopProp.harvest;
+        propData.shopDiscount += shopProp.shopDiscount;
+        propData.expMuti += shopProp.expMuti;
+        propData.pickRange += shopProp.pickRange;
+        propData.critical_strikes_probability += shopProp.critical_strikes_probability;
     }
 }

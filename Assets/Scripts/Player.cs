@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
 
         if (reviveTimer >= 1f)
         {
+            if (GameManager.Instance.propData.revive <= 0) return;
+
             GameManager.Instance.hp = Mathf.Clamp(GameManager.Instance.hp += GameManager.Instance.propData.revive, 0, GameManager.Instance.propData.maxHp);
 
             if (GameManager.Instance.currentRole.name == "¹«Å£")
